@@ -714,6 +714,8 @@ public class BitbucketCloudApiClient implements BitbucketApi {
     }
 
     private String getRequest(String path) throws IOException, InterruptedException {
+        LOGGER.log(Level.WARNING, "Preparing request to URL: " + path);
+
         try (InputStream inputStream = getRequestAsInputStream(path)){
             return IOUtils.toString(inputStream, "UTF-8");
         }
