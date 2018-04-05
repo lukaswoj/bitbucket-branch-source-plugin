@@ -243,7 +243,7 @@ public class BitbucketCloudApiClient implements BitbucketApi {
                 .set("owner", owner)
                 .set("repo", repositoryName)
                 .set("page", pageNumber)
-                .set("pagelen", 50);
+                .set("pagelen", 100);
         String url = template.expand();
 
         String response = getRequest(url);
@@ -383,9 +383,10 @@ public class BitbucketCloudApiClient implements BitbucketApi {
     @NonNull
     @Override
     public List<BitbucketCloudBranch> getBranches() throws IOException, InterruptedException {
-        String url = UriTemplate.fromTemplate(REPO_URL_TEMPLATE + "/refs/branches")
+        String url = UriTemplate.fromTemplate(REPO_URL_TEMPLATE + "/refs/branches{?pagelen}")
                 .set("owner", owner)
                 .set("repo", repositoryName)
+                .set("pagelen", 100)
                 .expand();
         String response = getRequest(url);
         try {
