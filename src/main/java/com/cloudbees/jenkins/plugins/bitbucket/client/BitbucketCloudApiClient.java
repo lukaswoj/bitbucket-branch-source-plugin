@@ -498,7 +498,7 @@ public class BitbucketCloudApiClient implements BitbucketApi {
                 .set("owner", owner)
                 .set("repo", repositoryName)
                 .set("page", pageNumber)
-                .set("pagelen", 50);
+                .set("pagelen", 100);
         String url = template.expand();
         try {
             String response = getRequest(url);
@@ -552,8 +552,9 @@ public class BitbucketCloudApiClient implements BitbucketApi {
     @Override
     @CheckForNull
     public BitbucketTeam getTeam() throws IOException, InterruptedException {
-        final String url = UriTemplate.fromTemplate(V2_TEAMS_API_BASE_URL + "{/owner}")
+        final String url = UriTemplate.fromTemplate(V2_TEAMS_API_BASE_URL + "{/owner},{?pagelen}")
                 .set("owner", owner)
+                .set("pagelen", 100)
                 .expand();
         try {
             return cachedTeam.get(owner, new Callable<BitbucketTeam>() {
@@ -586,7 +587,7 @@ public class BitbucketCloudApiClient implements BitbucketApi {
         cacheKey.append(owner).append("::").append(credentials.getUserName());
         final UriTemplate template = UriTemplate.fromTemplate(V2_API_BASE_URL + "{/owner}{?role,page,pagelen}")
                 .set("owner", owner)
-                .set("pagelen", 50);
+                .set("pagelen", 100);
         if (role != null && getLogin() != null) {
             template.set("role", role.getId());
             cacheKey.append("::").append(role.getId());
