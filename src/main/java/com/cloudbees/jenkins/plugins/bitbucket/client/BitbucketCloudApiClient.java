@@ -552,9 +552,8 @@ public class BitbucketCloudApiClient implements BitbucketApi {
     @Override
     @CheckForNull
     public BitbucketTeam getTeam() throws IOException, InterruptedException {
-        final String url = UriTemplate.fromTemplate(V2_TEAMS_API_BASE_URL + "{/owner},{?pagelen}")
+        final String url = UriTemplate.fromTemplate(V2_TEAMS_API_BASE_URL + "{/owner}")
                 .set("owner", owner)
-                .set("pagelen", 100)
                 .expand();
         try {
             return cachedTeam.get(owner, new Callable<BitbucketTeam>() {
