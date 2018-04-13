@@ -386,7 +386,7 @@ public class BitbucketCloudApiClient implements BitbucketApi {
         String url = UriTemplate.fromTemplate(REPO_URL_TEMPLATE + "/refs/branches{?q}")
                 .set("owner", owner)
                 .set("repo", repositoryName)
-                .set("q","(name=\"master\" OR name=\"trunk\" OR name=\"staging\" OR name=\"kubernetes-helm\" OR name=\"live\" OR name=\"dev\" OR name=\"dev-lukas\")")
+                .set("q","(name=\"master\" OR name=\"trunk\" OR name=\"test\" OR name=\"staging\" OR name=\"kubernetes-helm\" OR name=\"live\" OR name=\"dev\" OR name=\"dev-lukas\")")
                 .expand();
         String response = getRequest(url);
         try {
