@@ -450,9 +450,10 @@ public class BitbucketCloudApiClient implements BitbucketApi {
     }
 
     public List<BitbucketCloudBranch> getBranchesByRef(String nodePath) throws IOException, InterruptedException {
-        String url = UriTemplate.fromTemplate(REPO_URL_TEMPLATE + nodePath)
+        String url = UriTemplate.fromTemplate(REPO_URL_TEMPLATE + nodePath + "{?q}")
                 .set("owner", owner)
                 .set("repo", repositoryName)
+                .set("q","(name=\"default\" OR name=\"master\" OR name=\"trunk\" OR name=\"test\" OR name=\"staging\" OR name=\"kubernetes-helm\" OR name=\"live\" OR name=\"dev\" OR name=\"dev-lukas\" OR name=\"native_bot\")")
                 .expand();
         String response = getRequest(url);
         try {
